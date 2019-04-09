@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import pickle
 import pytest
 
 from schematics.common import PY2
@@ -771,3 +772,8 @@ def test_append_field_to_model():
     m = M(input_data)
     assert m.b == 'b'
     assert m.serialize() == input_data
+
+
+def test_pickle_model():
+    inst = SimpleModel({'field1': 'foo'})
+    assert pickle.loads(pickle.dumps(inst)) == inst
